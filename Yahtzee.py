@@ -7,7 +7,9 @@ class Game:
         "Fives": 5, 
         "Sixes": 6,
         "ThreeOfAKind": 0,
-        "FourOfAKind": 0}
+        "FourOfAKind": 0,
+        "FullHouse":0,
+        "Chance":0}
     
     def lance(self,lancer):
         resultats ={
@@ -18,56 +20,46 @@ class Game:
         "Fives": 0, 
         "Sixes": 0,
         "ThreeOfAKind": 0,
-        "FourOfAKind": 0}
+        "FourOfAKind": 0,
+        "FullHouse":0,
+        "Chance":0}
+
         cpt=0
         ThreeOfAKind = False    
         FourOfAKind = False
-        
+        FullhouseDouble = False
+        FullhouseTriple = False
         for i in lancer:
             for cle, valeur in self.diccombo.items():
                 if i == valeur:
                     resultats[cle] += i
+
         for cle, valeur in resultats.items():
-            if cle == "Ones":
-                if valeur>=3:
-                    ThreeOfAKind=True
-                if valeur>=4:
-                    FourOfAKind=True
-            elif cle == "Twos":
-                if valeur>=6:
-                    ThreeOfAKind=True
-                if valeur>=8:
-                    FourOfAKind=True
-            elif cle == "Threes":
-                if valeur>=9:
-                    ThreeOfAKind=True
-                if valeur>=12:
-                    FourOfAKind=True
-            elif cle == "Fours":
-                if valeur>=12:
-                    ThreeOfAKind=True
-                if valeur>=16:
-                    FourOfAKind=True
-            elif cle == "Fives":
-                if valeur>=15:
-                    ThreeOfAKind=True
-                if valeur>=20:
-                    FourOfAKind=True
-            elif cle == "Sixes":
-                if valeur>=18:
-                    ThreeOfAKind=True
-                if valeur>=24:
-                    FourOfAKind=True
+            for cledic, valeurdic in self.diccombo.items():
+                if cle == cledic:
+                    if valeur>= 3 * valeurdic and valeur>0:
+                        ThreeOfAKind = True
+                    if valeur >= 4 * valeurdic and valeur>0:
+                        FourOfAKind = True
+                    #FULLHOUSE
+                    if valeur== 3 * valeurdic and valeur>0:
+                        FullhouseTriple = True
+                    if valeur== 2 * valeurdic and valeur>0:
+                        FullhouseDouble = True
             cpt+=valeur
-                    
+ 
         if ThreeOfAKind==True:
             resultats["ThreeOfAKind"] += cpt
         if FourOfAKind==True:
             resultats["FourOfAKind"] += cpt
-        return resultats
-            
-        
+        if FullhouseTriple and FullhouseDouble:
+            resultats["FullHouse"] = 25
 
+        
+        resultats["Chance"] += cpt
+        return resultats
+
+        
 game = Game()
-lancer = [4,4,4,4,5]
+lancer = [4,4,3,4,3]
 print(game.lance(lancer))
