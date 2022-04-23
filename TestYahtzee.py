@@ -58,13 +58,6 @@ class TestClass(TestCase):
         for cle, valeur in resultat.items():
             if cle =="FourOfAKind":
                 self.assertEqual(29,valeur)
-                
-    def test_chance_should_return_24(self):
-        lancer = [6,4,6,3,5]
-        resultat = Yahtzee.Game().lance(lancer)
-        for cle, valeur in resultat.items():
-            if cle =="Chance":
-                self.assertEqual(24,valeur)
     
     def test_full_house_should_return_25(self):
         lancer = [6,6,6,5,5]
@@ -73,8 +66,33 @@ class TestClass(TestCase):
             if cle =="FullHouse":
                 self.assertEqual(25,valeur)
 
+    def test_small_straight_should_return_30(self):
+        lancer = [1,2,3,4,3]
+        resultat = Yahtzee.Game().lance(lancer)
+        for cle, valeur in resultat.items():
+            if cle =="SmallStraight":
+                self.assertEqual(30,valeur)
 
+    def test_large_straight_should_return_40(self):
+        lancer = [1,2,3,4,5]
+        resultat = Yahtzee.Game().lance(lancer)
+        for cle, valeur in resultat.items():
+            if cle =="LargeStraight":
+                self.assertEqual(40,valeur)
 
+    def test_chance_should_return_24(self):
+        lancer = [6,4,6,3,5]
+        resultat = Yahtzee.Game().lance(lancer)
+        for cle, valeur in resultat.items():
+            if cle =="Chance":
+                self.assertEqual(24,valeur)
+
+    def test_yahtzee_should_return_50(self):
+        lancer = [6,6,6,6,6]
+        resultat = Yahtzee.Game().lance(lancer)
+        for cle, valeur in resultat.items():
+            if cle =="Yahtzee":
+                self.assertEqual(50,valeur)
                 
 if __name__ == '__main__':
   main()
