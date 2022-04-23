@@ -45,5 +45,19 @@ class TestClass(TestCase):
             if cle =="Sixes":
                 self.assertEqual(18,valeur)
 
+    def test_three_of_a_kind_should_return_21(self):
+        lancer = [6,6,1,6,2]
+        resultat = Yahtzee.Game().lance(lancer)
+        for cle, valeur in resultat.items():
+            if cle =="ThreeOfAKind":
+                self.assertEqual(21,valeur)
+
+    def test_three_of_a_kind_should_return_29(self):
+        lancer = [6,6,6,6,5]
+        resultat = Yahtzee.Game().lance(lancer)
+        for cle, valeur in resultat.items():
+            if cle =="FourOfAKind":
+                self.assertEqual(29,valeur)
+                
 if __name__ == '__main__':
   main()
